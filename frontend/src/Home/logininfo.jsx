@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 // import { useHistory } from 'react-router-dom';
 // import { useEffect, useState } from 'react'
+import {server} from '../localtunel.jsx';
 import Student from '../student/student_int.jsx'
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -24,6 +25,7 @@ function logininfo() {
   const [state, setsstate] = useState(1);
   let [login, setlogin] = useState(0);
   //console.log(rollno);
+  console.log(server);
   function student_state() {
     setsstate(1);
   }
@@ -34,7 +36,7 @@ function logininfo() {
   const handlesubmit = (e) => {
     if(state == 1){
     e.preventDefault();
-    fetch('http://localhost:8000/login', {
+    fetch(`${server}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -65,7 +67,7 @@ function logininfo() {
       else 
       {
         e.preventDefault();
-        fetch('http://localhost:8000/loginn', {
+        fetch(`${server}/loginn`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
