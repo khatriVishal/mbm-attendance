@@ -1,0 +1,29 @@
+.uniinfo{
+    width: 50%;
+    background-color: #19263f;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* border-radius: 1vw; */
+
+}
+.uniinfo img{
+    width: 10vw;
+    height: 10vw;
+}
+.uniinfo h1{
+    color: white;
+    font-size: 1.8vw
+}
+.uniinfo p{
+    color: white;
+    font-size: 1vw;
+}
+@media screen and (max-width: 1200px) {
+    .uniinfo{
+        display: none;
+    }
+  }

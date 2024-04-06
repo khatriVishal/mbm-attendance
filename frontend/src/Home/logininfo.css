@@ -1,0 +1,90 @@
+.log_cred{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    /* border-radius: 1vw; */
+}
+#login-info{
+    width: 100%;
+    padding-left: 2vw;
+ 
+}
+#stu-tea-btn{
+    width: 90%;
+    height: 6vh;
+}
+#stu{
+    width: 50%;
+    height: 100%;
+    /* font-size: 4vh; */
+    border-top-left-radius: 1vh;
+    border-bottom-left-radius: 1vh;
+    background-color:rgb(28, 46, 80) ;
+    color: white;
+    /* margin-right: 10px; */
+}
+#stu:hover{
+    cursor: pointer;
+}
+#teac:hover{
+    cursor: pointer;
+}
+#teac{
+    width: 50%;
+    height: 100%;
+    border-top-right-radius: 1vh;
+    border-bottom-right-radius: 1vh;
+    background-color: white;
+}
+input{
+    width: 90%;
+    height: 4.5vh;
+    border-radius: 1vh;
+}
+#log{
+    width: 90%;
+    height: 4.5vh;
+    border-radius: 1vh;
+    background-color:rgb(28, 46, 80) ;
+    color: white;
+}
+#log:hover{
+    cursor: pointer;
+}
+.image {
+    display: none;
+}
+@media screen and (max-width: 1200px) {
+    .log_cred{
+        width: 100%;
+        border-radius: 10px;
+    }
+    .image {
+        width: 100%;
+        height: 25%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .image img{
+        width: 100px;
+        height: 100px;
+    }
+    #stu-tea-btn{
+        width: 96%;
+        height: 6vh;
+    }
+    .std-info{
+        width: 96%;
+    }
+    .std-info input{
+        width: 100%;
+    }
+    .std-info #log{
+        width: 100%;
+    }
+  }

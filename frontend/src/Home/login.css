@@ -1,0 +1,26 @@
+.login-back{
+    background-color: #1c2e50;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    height: 65vh;
+    /* background-color: white; */
+   
+        box-shadow: 2px 3px 17px 1px;
+}
+@media screen and (max-width: 1200px) {
+    .login-back{
+        border-radius: 10px solid;
+        /* width: 85vw; */
+    }
+    .container{
+        width: 85vw;
+    }
+  }

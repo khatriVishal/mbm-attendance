@@ -1,0 +1,118 @@
+
+.containerr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: aqua; */
+    flex-direction: column;
+    width: 100%;
+    height: 80vh;
+}
+.container2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+.first{
+    width: 12vw;
+    /* background-color: blue; */
+    height: 35vh;
+    margin: 20px;
+    border-radius: 10px;
+    border: 7px solid black;
+    box-sizing: border-box;
+}
+.second{
+    width: 12vw;
+    /* background-color: blue; */
+    height: 35vh;
+    margin: 20px;
+    border-radius: 10px;
+    border: 7px solid black;
+    box-sizing: border-box;
+    /* box-shadow: 0 30px 30px -25px rgba(#4133B7, .25); */
+
+}
+.first img{
+    color: yellow;
+    width: 100%;
+    height: 20vh;
+}
+.second img{
+    width: 100%;
+    height: 20vh;
+    object-fit: fill;
+    padding: 0;
+}
+.second button{
+    width: 100%;
+    height: 5vh;
+}
+.first button{
+    width: 100%;
+    height: 5vh;
+}
+.first button:hover{
+    cursor: pointer;
+}
+.second button:hover{
+    cursor: pointer;
+}
+.studentdashboard{
+    background: var(--grey);
+    height: 86vh;
+    padding: 2vh 2vw;
+    display: flex;
+    /* padding: 5%; */
+}
+.sidenavbar{
+    width: 14%;
+    /* margin-left: 2vw; */
+    /* box-shadow: ; */
+    /* box-sizing: border-box; */
+
+    box-shadow: 4px 4px 4px 4px #d3d3d3;
+    /* padding-top: 10px; */
+    border-radius: 10px;
+    height: 100%;
+}
+
+.nav-items{
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 20px; */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    height: 9vh;
+    width: 100%;
+    padding: 0 2.3vw;
+     margin-top: 9%;
+}
+.nav-items h3{
+    padding-left: 10px;
+}
+.nav-items img{
+    height: 5vh;
+    width: 5vh;
+}
+ @media screen and (max-width: 1200px)  {
+   .nav-items h3{
+    display: none;
+   } 
+   .nav-items{
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 20px; */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 9vh;
+    width: 100%;
+    padding: 0 0;
+     margin-top: 5%;
+}
+
+}
