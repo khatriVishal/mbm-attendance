@@ -8,11 +8,11 @@ return (<div className='outer-container'>
 <img src={Profileicon} alt="" />
 </div>
 <div className='prodetails'>
-<h4>Name : {student.userName}</h4>
-<h4>Roll No : {student.userId}</h4>
-<h4>Year : {student.year}</h4>
-<h4>Branch : {student.branch}</h4>
-<h4>Semester : {student.semester}</h4>
+<div>Name : {student.userName}</div>
+<div>Roll No : {student.userId}</div>
+<div>Year : {student.year}</div>
+<div>Branch : {student.branch}</div>
+<div>Semester : {student.semester}</div>
 </div>
 </div>)
 

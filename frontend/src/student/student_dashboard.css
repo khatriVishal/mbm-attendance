@@ -24,6 +24,13 @@
     justify-content: space-evenly;
     flex-direction: column;
 }
-.prodetails h4{
+.prodetails div{
     font-size: 5vh;
+    font-weight: 700;
+}
+@media screen and (max-width: 1200px){
+    .prodetails div{
+        font-size: 3vh;
+        font-weight: 500;
+    }
 }
