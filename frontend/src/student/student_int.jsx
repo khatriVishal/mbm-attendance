@@ -8,6 +8,7 @@ import Logouticon from '../assets/logout.png'
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import Student_dash from "./student_dashboard.jsx"
 import "./student_int.css";
 // import SideNav from './sidenav.jsx';
 function student() {
@@ -50,7 +51,7 @@ function student() {
 
           </div>
           <div className="studentbodycontainer">
-
+                   <Student_dash data={data}></Student_dash>
           </div>
         </div>
       </div>
