@@ -87,7 +87,7 @@ function logininfo() {
             //   pathname: '/loginn',
             //   state: { someData: 'Hello' } // Your data object
             // });
-            navigate("loginn", { state: { data } });
+            navigate("login", { state: { data } });
             // if (data.redirectUrl) {
             //   // window.location.href = data.redirectUrl;
             // }
