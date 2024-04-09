@@ -19,6 +19,7 @@ function student() {
   // let [attendance , setattendance] = usestate(0);
   const location = useLocation();
   const { data } = location.state;
+  console.log(data);
   console.log(data.userData.userName);
   function handle1(){
   setstate(1);

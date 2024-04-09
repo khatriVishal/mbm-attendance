@@ -3,6 +3,8 @@ const app = express();
 const methodOverride = require("method-override");
 const cors = require('cors');
 const mysql = require('mysql2');
+const multer = require('multer');
+let imagename;
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -79,7 +81,37 @@ app.post("/loginn" , (req , res)=>{
       res.json({ userData});}
   })
 }) 
+const storage = multer.diskStorage({
+  destination:(req, file, cb) => {
+    // const { textData } = req.body;
+    // console.log(textData+"u")
+    cb(null, '../frontend/src/uploads');
+  },
+  filename:function (req, file, cb) {
+    
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    imagename = "image" + '-' + uniqueSuffix+".jpg";
+    cb(null, "image" + '-' + uniqueSuffix+".jpg");
+  }
+});
+const upload = multer({ storage });
+app.post('/upload',  upload.single('image' ),(req, res) => {
+  console.log(req.body);
+  const sql = `UPDATE student SET photo = "${imagename}" where   Rollno= "${req.body.rollno}" and name = "${req.body.name}"`;
+  console.log(sql);
+  const { textData } = req.body;
+  const file = req.file;
+ db.query(sql , (err , data)=>{
+  if(err) res.status("404").send("user not found");
+  else 
+  {
+    res.json({ message: 'File uploaded successfully!' });
+  }
+ })  
+  
 
+  
+});
 app.listen(port , ()=>{
     console.log(`working on ${port}`);
 })

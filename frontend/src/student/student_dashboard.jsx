@@ -1,11 +1,24 @@
 import Profileicon from '../assets/profile-icon.png';
 import './student_dashboard.css';
+import Image from "/uploads/image-1712607204659-560846925.jpg"
+import { useState } from 'react';
 function student_dash(props){
+    let image = "";
 const student = props.data.userData;
+console.log("student");
+console.log(student.photo);
 console.log(student);
+if(student.photo!=null)
+ {
+    // console.log("yes");
+    image = `/uploads/${student.photo}`;
+    console.log(image);
+        // setimage("../uploads/");
+ }
 return (<div className='outer-container'>
+    
 <div className="proimg">
-<img src={Profileicon} alt="" />
+<img src = {image} alt="" />
 </div>
 <div className='prodetails'>
 <div>Name : {student.userName}</div>

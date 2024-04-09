@@ -4,8 +4,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 // import { useHistory } from 'react-router-dom';
 // import { useEffect, useState } from 'react'
+// import Image from ""
 import {server} from '../localtunel.jsx';
 import Student from '../student/student_int.jsx'
+import Upload from './imageupload.jsx'
 import axios from "axios";
 import { useState, useEffect } from "react";
 const btn_clicked = {
@@ -51,12 +53,21 @@ function logininfo() {
         }
       })
       .then(data => {
+        console.log("yes");
         console.log(data);
         // navigate.push({
         //   pathname: '/loginn',
         //   state: { someData: 'Hello' } // Your data object
         // });
-        navigate("loginn", { state: { data } });
+        console.log(data.userData.photo);
+        if(data.userData.photo == null){
+        navigate("login/upload",{ state: { data } });}
+        else 
+        {
+          
+          navigate("loginn",{ state: { data } });
+        }
+        // navigate("loginn", { state: { data } });
         // if (data.redirectUrl) {
         //   // window.location.href = data.redirectUrl;
         // }
@@ -148,7 +159,7 @@ function logininfo() {
           <div className="std-info">
             <input type="text" placeholder={state ? "Roll No" : "Username"} onChange={(e) => setrollno(e.target.value)} />
             <br /><br />
-            <input type="text" placeholder="Password" onChange={(e) => setpassword(e.target.value)} />
+            <input type="password" placeholder="Password" onChange={(e) => setpassword(e.target.value)} />
             <br /><br />
             <button id="log" >Login</button>
           </div>
