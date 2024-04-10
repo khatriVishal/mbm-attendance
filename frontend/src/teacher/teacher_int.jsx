@@ -8,7 +8,8 @@ import Logouticon from '../assets/logout.png'
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import Teacher_dash from "./teacher_dashboard.jsx"
+import Teacher_dash from "./teacher_dashboard.jsx";
+import SubjectForm from './subject_form.jsx';
 // import Attendance from './attendance.jsx';
 import "./teacher_int.css";
 // import SideNav from './sidenav.jsx';
@@ -47,7 +48,7 @@ function student() {
               <h3>Attendance</h3>
             </div>
             
-            <div className="nav-items" onClick={handle3} >
+            <div className="nav-items"  >
               <img src={Subjecticon} alt="" />
               <h3>Subjects</h3>
             </div>
@@ -58,8 +59,8 @@ function student() {
           </div>
           <div className="Teacherbodycontainer">
             <div  className={state==1? "clicked" : "unclicked"} >
-
-            <Teacher_dash data={data}></Teacher_dash>
+              <SubjectForm></SubjectForm>
+            {/* <Teacher_dash data={data}></Teacher_dash> */}
             </div>
             <div className={state==2? "clicked" : "unclicked"}>
             {/* <Attendance></Attendance> */}

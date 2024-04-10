@@ -112,6 +112,7 @@
     border-radius: 10px;
     height: 100%;
     margin-left: 2%;
+    overflow: scroll;
 }
  @media screen and (max-width: 1200px)  {
    .nav-items h3{

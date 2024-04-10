@@ -1,5 +1,6 @@
 import Profileicon from '../assets/profile-icon.png';
 import './teacher_dashboard.css';
+import SubjectForm from './subject_form.jsx';
 function teacher_dash(props){
 const teacher = props.data.userData;
 console.log(teacher);
