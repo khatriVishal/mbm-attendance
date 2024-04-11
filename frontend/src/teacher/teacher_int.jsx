@@ -59,7 +59,7 @@ function student() {
           </div>
           <div className="Teacherbodycontainer">
             <div  className={state==1? "clicked" : "unclicked"} >
-              <SubjectForm></SubjectForm>
+              <SubjectForm data={data}></SubjectForm>
             {/* <Teacher_dash data={data}></Teacher_dash> */}
             </div>
             <div className={state==2? "clicked" : "unclicked"}>

@@ -81,6 +81,7 @@ app.post("/loginn" , (req , res)=>{
       res.json({ userData});}
   })
 }) 
+
 const storage = multer.diskStorage({
   destination:(req, file, cb) => {
     // const { textData } = req.body;
@@ -102,13 +103,58 @@ app.post('/upload',  upload.single('image' ),(req, res) => {
   const { textData } = req.body;
   const file = req.file;
  db.query(sql , (err , data)=>{
-  if(err) res.status("404").send("user not found");
+  if(err) res.send(err);
   else 
   {
-    res.json({ message: 'File uploaded successfully!' });
+    console.log("yes");
+    res.json({ message: 'File uploaded succesfully' });
   }
  })  
   
+
+  
+});
+// create subject 
+app.post('/createsubject',  (req, res) => {
+  console.log("yes");
+  const body = req.body;
+  console.log(req.body);
+  const sql = `INSERT INTO subjects (subject_id, subject_name,associated_teacher, branch, semester, Degree) VALUES ('${body.subjectcode}', '${body.subjectname}', '${body.tid}', '${body.branch}', '${body.Semester}', '${body.degree}');`;
+  console.log(sql);
+  db.query(sql , (err1 , data1)=>{
+    if(err1){console.log(err1); res.status("404").send("user not found");}
+    else 
+    {
+      const sql2 = `select * from student where branch = '${body.branch}' and semester = '${body.Semester}'and Degree = '${body.degree}'`;
+
+      db.query(sql2 , (err2 , data2)=>{
+        console.log(data2);
+       if(err2) console.log(err2);
+       else 
+       {
+        const student_data = data2;
+        console.log(student_data.length);
+        for(let i = 0 ; i<student_data.length ; i++)
+        {
+          const sql3 = 
+          `INSERT INTO attendance (subject_id, subject_name,student_name , photo, tot_attendace,mark_attendance, branch ,semester, Degree) VALUES ('${body.subjectcode}', '${body.subjectname}', '${student_data[i].name}', '${student_data[i].photo}' , '0' ,'0', '${student_data[i].branch}', '${student_data[i].semester}', '${student_data[i].Degree}')`;
+          db.query(sql3 , (err3 , data3)=>{
+           if(err3) 
+           console.log("err3 ", err3);
+          
+          
+
+
+          })
+        }
+        res.json({ message:'succsfully created subject' });
+       }
+
+
+      })
+      
+    }
+   })  
 
   
 });

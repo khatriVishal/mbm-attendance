@@ -1,28 +1,64 @@
-
+import { useState, useEffect } from "react";
 import "./subject_form.css"
-function subjectform(){
-
+import {server} from '../localtunel.jsx';
+function subjectform(props){
+    console.log(props.data.userData.userId);
+    
+    let tid = props.data.userData.userId;
+    let [subjectname, setsubjectname] = useState('');
+    let [subjectcode, setsubjectcode] = useState('');
+    let [degree , setdegree] = useState('');
+    let [Semester , setsemester] = useState('');
+    let [branch , setbranch] = useState('');
+    function createsubject(e){
+        e.preventDefault();
+        console.log(branch);
+        console.log(subjectname);
+        console.log(subjectcode);
+        console.log(degree);
+        console.log(Semester);
+        
+        console.log("yes");
+        fetch(`${server}/createsubject`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ subjectname,subjectcode,degree,Semester,branch,tid })
+          })
+            .then(response => {
+              if (response.ok) {
+                alert("successfully created subject");
+                return response.json();
+              } else {
+                throw new Error('Login failed');
+              }
+            })
+            .catch(error => {
+              alert('Login failed. Please check your credentials.');
+            });
+    }
 return <>
 <div className="createbubject">
 <h1>Create Subject</h1>
 </div>
-<form action="">
+<form  onSubmit={createsubject}>
 <div className="input-box">
 <div className="details">Subject Name:</div>
 <div className="inputs">
-<input type="text" name="" id="" placeholder="Enter Subject Name"/>
+<input type="text" name="" id="" placeholder="Enter Subject Name" onChange={(e) => setsubjectname(e.target.value)}/>
 </div>
 </div>
 <div className="input-box">
 <div className="details">Subject Code:</div>
 <div className="inputs">
-<input type="text" name="" id="" placeholder="Enter Subject Name"/>
+<input type="text" name="" id="" placeholder="Enter Subject Name"  onChange={(e) => setsubjectcode(e.target.value)}/>
 </div>
 </div>
 <div className="input-box">
 <div className="details">Degree type:</div>
 <div className="inputs">
-<select >
+<select  onChange={(e) => setdegree(e.target.value)}>
         <option value="">Choose an degree</option>
         <option value="BE">BE</option>
         <option value="ME">ME</option>
@@ -33,12 +69,12 @@ return <>
 <div className="input-box">
 <div className="details">Branch:</div>
 <div className="inputs">
-<select >
+<select  onChange={(e) => setbranch(e.target.value)}>
         <option value="">Choose an branch</option>
-        <option value="1">CSE</option>
-        <option value="2">AIDS</option>
-        <option value="3">IT</option>
-        <option value="4">mechanical</option>
+        <option value="CSE">CSE</option>
+        <option value="AIDS">AIDS</option>
+        <option value="IT">IT</option>
+        <option value="mechanical">mechanical</option>
         {/* Add more options as needed */}
       </select>
 </div>
@@ -46,7 +82,7 @@ return <>
 <div className="input-box">
 <div className="details">Semester:</div>
 <div className="inputs">
-<select >
+<select  onChange={(e) => setsemester(e.target.value)}>
         <option value="">Choose an Semester</option>
         <option value="1">1st</option>
         <option value="2">2nd</option>
