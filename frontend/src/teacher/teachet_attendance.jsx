@@ -19,20 +19,44 @@ function attendance(props) {
     let [editdata, seteditdata] = useState([]);
     let [deletedata, setdeletedata] = useState([]);
     let [state, setstate] = useState(0);
-    let [createsubjects , setcreatesuubjects] = useState(0);
+    let [createsubjects , setcreatesubjects] = useState(0);
     console.log(createsubjects , "createsubjects");
     // let edit_data;
     console.log(editdata, "editt");
     // console.log("uessss" , teacher_subject[0]);
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.post(`${server}/attendance`, { Tid });
-                setteacher_subject(response.data);
-            } catch (error) {
-                alert('Failed to fetch data. Please try again.');
-                console.error('Error fetching data:', error);
-            }
+        console.log("yes my name is vishal");
+        const fetchData =  () => {
+            fetch(`${server}/attendance`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({Tid})
+              })
+                .then(response => {
+                  if (response.ok) {
+                    return response.json();
+                    // setteacher_subject(response.data);
+                  } else {
+                    throw new Error('Something wrong happened');
+                  }
+                })
+                .then(data =>{
+                    setteacher_subject(data);
+                })
+                .catch(error => {
+                    alert('Failed to fetch data. Please try again.');
+                    console.error('Error fetching data:', error);
+                });
+
+            // try {
+            //     const response = await axios.post(`${server}/attendance`, { Tid });
+            //     setteacher_subject(response.data);
+            // } catch (error) {
+            //     alert('Failed to fetch data. Please try again.');
+            //     console.error('Error fetching data:', error);
+            // }
         };
 
         fetchData();
@@ -81,7 +105,7 @@ function attendance(props) {
             .catch(error => {
               alert('Same subect code is not allowed');
             });
-            setcreatesuubjects(0);
+            setcreatesubjects(0);
             
     }
     function editsubject(e){
@@ -221,7 +245,7 @@ function attendance(props) {
         },
     };
     function handleaddsubject(){
-        setcreatesuubjects(1);
+        setcreatesubjects(1);
     }
     return (<>
     <div className="createnew_subject">

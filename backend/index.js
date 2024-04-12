@@ -162,14 +162,14 @@ app.post('/createsubject',  (req, res) => {
   
 });
 app.post("/attendance" ,(req , res)=>{
-  console.log("yes");
+  console.log("yesattttt");
   console.log(req.body);
   const sql = `select * from subjects where associated_teacher = '${req.body.Tid}'`;
   // console.log(sql);
   db.query(sql , (err , data)=>{
     // console.log(err);
     if(err) {console.log("yessssss");console.log(err);res.send("Some error happened try again");}
-    else res.send(data);
+    else {console.log(data);res.send(data);}
   })
 
   });
