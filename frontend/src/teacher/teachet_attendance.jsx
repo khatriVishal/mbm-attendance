@@ -36,7 +36,7 @@ function attendance(props) {
         };
 
         fetchData();
-    }, [state]);
+    }, [state , editdata , createsubjects]);
     async function deltesubject() {
         console.log("yesssssssssssssssssssssssssssssssss");
         try {
@@ -104,9 +104,10 @@ function attendance(props) {
             .then(response => {
               if (response.ok) {
                 alert("successfully edit subject");
-                setedeldata([]);
                 let newstate = state+1;
                 setstate(newstate);
+                seteditdata([]);
+                
               } else {
                 throw new Error('Something wrong happened');
               }
@@ -114,6 +115,7 @@ function attendance(props) {
             .catch(error => {
               alert('unable to create');
             });
+          
     }
     console.log(teacher_subject, "yessssssss");
     const columns = [
@@ -236,7 +238,7 @@ function attendance(props) {
             <div>
                 <button onClick={handlebackbutton}>back</button>
             </div>
-        <div className={" createbubject" }>
+        <div className={"createbubject" }>
             <h1>Edit Subject</h1>
         </div>
         <form onSubmit={editsubject}>
