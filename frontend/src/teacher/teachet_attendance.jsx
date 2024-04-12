@@ -79,7 +79,7 @@ function attendance(props) {
               }
             })
             .catch(error => {
-              alert('Login failed. Please check your credentials.');
+              alert('Same subect code is not allowed');
             });
             setcreatesuubjects(0);
             
@@ -314,7 +314,7 @@ function attendance(props) {
 <div className="input-box">
 <div className="details">Subject Code:</div>
 <div className="inputs">
-<input type="text" name="" id="" placeholder="Enter Subject Name"  onChange={(e) => setsubjectcode(e.target.value)}/>
+<input type="text" name="" id="" placeholder="Enter Subject code"  onChange={(e) => setsubjectcode(e.target.value)}/>
 </div>
 </div>
 <div className="input-box">
