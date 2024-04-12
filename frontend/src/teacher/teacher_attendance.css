@@ -12,3 +12,20 @@
         font-size: 18px;
     }
 }
+.createnew_subject{
+    padding: 20px 10px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+
+}
+.createnew_subject button{
+    background-color: bisque;
+    border-radius: 2px;
+}
+.createnew_subject button:hover{
+    cursor: pointer;
+}
+.unclicked{
+    display: none;
+}

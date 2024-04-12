@@ -23,19 +23,16 @@ function student() {
   // let [attendance , setattendance] = usestate(0);
   const location = useLocation();
   const { data } = location.state;
-  console.log(data.userData.userName);
+  console.log(location.state);
+  let teacher_subjects;
+
+  // console.log(state);
   function handle1(){
   setstate(1);
   }
- async function handle2(){
-    setstate(2);
-    // console.log("2");
-    try {
-      const response = await axios.get(`http://localhost:8000/attendance`);
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+ function handle2(){
+  setstate(2);
+    
   }
   function handle3(){
     setstate(3);
@@ -43,6 +40,8 @@ function student() {
     navigate("/");
     // console.log("3")
   }
+ 
+  
   return (
     <>
       <Navbar></Navbar>
@@ -69,12 +68,11 @@ function student() {
           </div>
           <div className="Teacherbodycontainer">
             <div  className={state==1? "clicked" : "unclicked"} >
-              {/* <SubjectForm data={data}></SubjectForm> */}
-              <Teach_att></Teach_att>
-            {/* <Teacher_dash data={data}></Teacher_dash> */}
+              <Teacher_dash data = {data}></Teacher_dash>
             </div>
             <div className={state==2? "clicked" : "unclicked"}>
-            {/* <Attendance></Attendance> */}
+             
+            <Teach_att data = {data.userData}></Teach_att>
             </div>
            
                    {/*  */}

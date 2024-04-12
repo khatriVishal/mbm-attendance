@@ -128,7 +128,7 @@ app.post('/createsubject',  (req, res) => {
     else 
     {
       const sql2 = `select * from student where branch = '${body.branch}' and semester = '${body.Semester}'and Degree = '${body.degree}'`;
-
+     console.log(sql2);
       db.query(sql2 , (err2 , data2)=>{
         console.log(data2);
        if(err2) console.log(err2);
@@ -140,16 +140,17 @@ app.post('/createsubject',  (req, res) => {
         {
           const sql3 = 
           `INSERT INTO attendance (subject_id, subject_name,student_name , photo, tot_attendace,mark_attendance, branch ,semester, Degree , id) VALUES ('${body.subjectcode}', '${body.subjectname}', '${student_data[i].name}', '${student_data[i].photo}' , '0' ,'0', '${student_data[i].branch}', '${student_data[i].semester}', '${student_data[i].Degree}', '${newId}')`;
+          console.log(sql3);
           db.query(sql3 , (err3 , data3)=>{
            if(err3) 
-           console.log("err3 ", err3);
-          
+           res.send(err3);
           
 
 
           })
         }
-        res.json({ message:'succsfully created subject' });
+
+        res.json({ message:'succesfully created subject' });
        }
 
 
@@ -160,10 +161,50 @@ app.post('/createsubject',  (req, res) => {
 
   
 });
-app.get("/attendance" ,(req , res)=>{
+app.post("/attendance" ,(req , res)=>{
   console.log("yes");
-  res.json({ message: 'attendance' });
+  console.log(req.body);
+  const sql = `select * from subjects where associated_teacher = '${req.body.Tid}'`;
+  // console.log(sql);
+  db.query(sql , (err , data)=>{
+    // console.log(err);
+    if(err) {console.log("yessssss");console.log(err);res.send("Some error happened try again");}
+    else res.send(data);
+  })
+
   });
+  app.post("/editsubject",(req , res)=>{
+    console.log(req.body);
+    const sql = `UPDATE subjects set subject_id = '${req.body.subjectcode}',subject_name ='${req.body.subjectname}' ,Degree = '${req.body.degree}',semester = '${req.body.Semester}', branch = '${req.body.branch}' where id = '${req.body.id}'`;
+    db.query(sql , (err , data)=>{
+      if(err) res.send(err);
+      else res.send("succesfully edited");
+    })
+  })
+  app.post("/deletesubject",(req , res)=>{
+    const sql = `delete from subjects where id ='${req.body.id}'`;
+    console.log(sql);
+    db.query(sql , (err1 , data1)=>{
+      if(err1)
+     {
+      res.send(err1);
+     }
+      else {
+        const sql2 = `delete from attendance where id ='${req.body.id}'`;
+        console.log(sql2);
+        db.query(sql2 , (err2 , data2)=>
+        {
+          if(err2) res.send(err2);
+          else {
+            res.send("deleted");
+          }
+        });
+      }
+    })
+    console.log(req.body);
+  
+  }
+   )
 app.listen(port , ()=>{
     console.log(`working on ${port}`);
 })
