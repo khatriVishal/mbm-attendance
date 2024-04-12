@@ -1,2 +1,2 @@
 export const server =
-"https://neat-deer-smell.loca.lt";
+"https://stale-crabs-yawn.loca.lt";
