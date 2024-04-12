@@ -10,6 +10,9 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import Teacher_dash from "./teacher_dashboard.jsx";
 import SubjectForm from './subject_form.jsx';
+import {server} from '../localtunel.jsx';
+import axios from 'axios';
+import Teach_att from './teachet_attendance.jsx';
 // import Attendance from './attendance.jsx';
 import "./teacher_int.css";
 // import SideNav from './sidenav.jsx';
@@ -24,12 +27,19 @@ function student() {
   function handle1(){
   setstate(1);
   }
-  function handle2(){
+ async function handle2(){
     setstate(2);
     // console.log("2");
+    try {
+      const response = await axios.get(`http://localhost:8000/attendance`);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   }
   function handle3(){
     setstate(3);
+   
     navigate("/");
     // console.log("3")
   }
@@ -59,7 +69,8 @@ function student() {
           </div>
           <div className="Teacherbodycontainer">
             <div  className={state==1? "clicked" : "unclicked"} >
-              <SubjectForm data={data}></SubjectForm>
+              {/* <SubjectForm data={data}></SubjectForm> */}
+              <Teach_att></Teach_att>
             {/* <Teacher_dash data={data}></Teacher_dash> */}
             </div>
             <div className={state==2? "clicked" : "unclicked"}>

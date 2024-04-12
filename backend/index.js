@@ -4,6 +4,7 @@ const methodOverride = require("method-override");
 const cors = require('cors');
 const mysql = require('mysql2');
 const multer = require('multer');
+const {v4 : uuidv4} = require('uuid')
 let imagename;
 const db = mysql.createConnection({
   host: 'localhost',
@@ -119,7 +120,8 @@ app.post('/createsubject',  (req, res) => {
   console.log("yes");
   const body = req.body;
   console.log(req.body);
-  const sql = `INSERT INTO subjects (subject_id, subject_name,associated_teacher, branch, semester, Degree) VALUES ('${body.subjectcode}', '${body.subjectname}', '${body.tid}', '${body.branch}', '${body.Semester}', '${body.degree}');`;
+  const newId = uuidv4();
+  const sql = `INSERT INTO subjects (subject_id, subject_name,associated_teacher, branch, semester, Degree,id) VALUES ('${body.subjectcode}', '${body.subjectname}', '${body.tid}', '${body.branch}', '${body.Semester}', '${body.degree}','${newId}');`;
   console.log(sql);
   db.query(sql , (err1 , data1)=>{
     if(err1){console.log(err1); res.status("404").send("user not found");}
@@ -137,7 +139,7 @@ app.post('/createsubject',  (req, res) => {
         for(let i = 0 ; i<student_data.length ; i++)
         {
           const sql3 = 
-          `INSERT INTO attendance (subject_id, subject_name,student_name , photo, tot_attendace,mark_attendance, branch ,semester, Degree) VALUES ('${body.subjectcode}', '${body.subjectname}', '${student_data[i].name}', '${student_data[i].photo}' , '0' ,'0', '${student_data[i].branch}', '${student_data[i].semester}', '${student_data[i].Degree}')`;
+          `INSERT INTO attendance (subject_id, subject_name,student_name , photo, tot_attendace,mark_attendance, branch ,semester, Degree , id) VALUES ('${body.subjectcode}', '${body.subjectname}', '${student_data[i].name}', '${student_data[i].photo}' , '0' ,'0', '${student_data[i].branch}', '${student_data[i].semester}', '${student_data[i].Degree}', '${newId}')`;
           db.query(sql3 , (err3 , data3)=>{
            if(err3) 
            console.log("err3 ", err3);
@@ -158,6 +160,10 @@ app.post('/createsubject',  (req, res) => {
 
   
 });
+app.get("/attendance" ,(req , res)=>{
+  console.log("yes");
+  res.json({ message: 'attendance' });
+  });
 app.listen(port , ()=>{
     console.log(`working on ${port}`);
 })

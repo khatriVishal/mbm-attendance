@@ -1,0 +1,14 @@
+.custom-table {
+    .rdt_TableHeadRow {
+        height: 70px; /* Adjust the height as needed */
+        background-color: #eee; /* Header row background color */
+        font-size: 18px;
+        font-weight: 700;
+        /* color: white; */
+    }
+    .rdt_TableRow {
+        height: 70px; /* Adjust the height as needed */
+        background-color: #eee;
+        font-size: 18px;
+    }
+}
