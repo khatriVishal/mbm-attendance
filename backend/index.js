@@ -1,3 +1,5 @@
+
+
 const express = require("express");
 const app = express();
 const methodOverride = require("method-override");
@@ -12,6 +14,20 @@ const db = mysql.createConnection({
   database: 'university',
   password : '1234'
 });
+// function aaadata(){
+ 
+//   // console.log(sql);
+//   for(let i = 0 ; i<data.length ; i++)
+//   {
+//     const sql = `insert into student (Rollno , name,branch,semester,password,Degree) values ('${data[i].rollno}' , '${data[i].name}', '${data[i].branch}','${data[i].semester}','${data[i].password}','${data[i].rollno}')`; 
+//     db.query(sql , (err , data)=>{
+//       if(err) console.log(err);
+//     })
+//   }
+
+
+// }
+// aaadata();
 const port = 8000;
 app.use(cors());
 app.use(methodOverride('_method'));
@@ -82,12 +98,12 @@ app.post("/loginn" , (req , res)=>{
       res.json({ userData});}
   })
 }) 
-
+app.use("/uploads", express.static("./uploads"));
 const storage = multer.diskStorage({
   destination:(req, file, cb) => {
     // const { textData } = req.body;
     // console.log(textData+"u")
-    cb(null, '../frontend/src/uploads');
+    cb(null, './uploads');
   },
   filename:function (req, file, cb) {
     
@@ -108,7 +124,7 @@ app.post('/upload',  upload.single('image' ),(req, res) => {
   else 
   {
     console.log("yes");
-    res.json({ message: 'File uploaded succesfully' });
+    res.send(imagename);
   }
  })  
   
@@ -140,6 +156,7 @@ app.post('/createsubject',  (req, res) => {
         {
           const sql3 = 
           `INSERT INTO attendance (subject_id, subject_name,student_name ,Rollno, photo, tot_attendace,mark_attendance, branch ,semester, Degree , id) VALUES ('${body.subjectcode}', '${body.subjectname}', '${student_data[i].name}', '${student_data[i].Rollno}','${student_data[i].photo}' , '0' ,'0', '${student_data[i].branch}', '${student_data[i].semester}', '${student_data[i].Degree}', '${newId}')`;
+          console.log(sql3 , "sql3");
           console.log(sql3);
           db.query(sql3 , (err3 , data3)=>{
            if(err3) 
@@ -217,6 +234,110 @@ app.post("/attendance" ,(req , res)=>{
     
     }
 
+    })
+    console.log(sql);
+   })
+   app.post("/updateattendance" , (req , res)=>{
+    console.log(req.body);
+    let recieved_data = req.body.newdatatodisplay;
+    console.log("recieved");
+    for(let i = 0 ; i<recieved_data.length ; i++)
+    {
+    
+      // console.log("yesss");
+      console.log(recieved_data[i].present);
+      if(recieved_data[i].present === true)
+      {
+         const sql = `update attendance  set tot_attendace = tot_attendace+1 , mark_attendance = mark_attendance+1 where id = '${recieved_data[i].id}' and Rollno = '${recieved_data[i].rollno}'`;
+          // console.log(sql);
+         db.query(sql , (err , data)=>{
+          if(err)
+          {
+            console.log(err);
+           res.send(err);
+          }
+          else 
+          {
+            const sql2 = `insert into viewattendance ( student_name, photo, attendance, id, Rollno, att_date)
+             values ('${recieved_data[i].name}' , '${recieved_data[i].image}' , 'present' , '${recieved_data[i].id}', '${recieved_data[i].rollno}', CURRENT_DATE)
+            `;
+            db.query(sql2 , (err2 , data)=>{
+              if(err2)
+              {
+                console.log(err2);
+                res.send(err2);
+              }
+              
+            })
+            // console.log(sql2);
+          }
+         });
+          
+      }
+      else 
+      {
+        const sql = `update attendance  set tot_attendace = tot_attendace+1 where id = '${recieved_data[i].id}' and Rollno = '${recieved_data[i].rollno}'`;
+        console.log("NOOOO");
+        db.query(sql , (err , data)=>{
+          if(err)
+          {
+            console.log(err);
+            console.log("yessssssss");
+          }
+          else 
+          {
+            const sql2 = `insert into viewattendance ( student_name, photo, attendance, id, Rollno, att_date)
+             values ('${recieved_data[i].name}' , '${recieved_data[i].image}' , 'absent' , '${recieved_data[i].id}', '${recieved_data[i].rollno}', CURRENT_DATE)
+            `;
+            db.query(sql2 , (err2 , data)=>{
+              if(err2)
+              {
+                console.log(err2);
+                res.send(err2);
+              }
+
+              });
+          }
+         });
+      }
+    }
+    res.json("succesfully created subject");
+   });
+   app.post("/getdate" , (req , res)=>{
+    console.log("received");
+    console.log(req.body);
+    const sql =` select distinct att_date from viewattendance where id = '${req.body.newdata[0].id}'`;
+    db.query(sql , (err , data)=>{
+      if(err) res.send(err);
+      else {
+        let newdate = [];
+        for(let i = 0 ; i<data.length ; i++){
+        const dateString = data[i].att_date;
+        const moment = require('moment-timezone');
+  
+        // const dateString = '2024-04-13T18:30:00.000Z';
+        const ISTDateString = moment(dateString).tz('Asia/Kolkata').format('YYYY-MM-DD');
+        newdate.push(ISTDateString);
+        }
+        // console.log(ISTDateString); 
+        
+        
+        
+        res.send(newdate);}
+     
+      
+    })
+    console.log(sql);
+   })
+   app.post("/viewattendance" , (req , res)=>{
+    console.log(req.body);
+    console.log("request accepted");
+    const sql = `select student_name, Rollno, attendance  from viewattendance where att_date = '${req.body.selectedDate}' and id = '${req.body.id}'`;
+    db.query(sql , (err , data)=>{
+      if(err)
+      res.send(err);
+     else 
+    { res.send(data);}
     })
     console.log(sql);
    })

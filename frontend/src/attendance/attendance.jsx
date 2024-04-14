@@ -55,7 +55,7 @@ for(let i = 0 ; i<studentdata.length ; i++)
         name : studentdata[i].student_name,
         rollno : studentdata[i].Rollno,
         image : `/uploads/${studentdata[i].photo}`,
-        id : studentdata[i].Rollno,
+        id : studentdata[i].id,
         present: false
     }
     datatodisplay.push(newdata);
@@ -171,8 +171,10 @@ function handleback(){
   setClicked(!Clicked);
 }
 
-function Changeattendance(){
-    
+function Changeattendance( newarr){
+    console.log("yesssssssss");
+    console.log(newarr);
+    setdatatodisplay(newarr);
 }
 if(datatodisplay.length>0){
 console.log(datatodisplay[counter].image);}
@@ -188,9 +190,9 @@ if(datatodisplay.length>0){
        
     </div>
     <div className="maincontainer"  >
-    <div className="s-details" style={{ backgroundColor: datatodisplay[counter].present=== true? "#87eb87" : "" }}>
+    <div className="s-details" style={{ backgroundColor: datatodisplay[counter].present=== true? "#87eb87" : "#e0474c" }}>
      <div className="phot">
-     <img src={ datatodisplay[counter].image}  />
+     <img src={ `${server}${datatodisplay[counter].image}`}  />
      </div> 
      <div className="rollno-details">
      <h3>{datatodisplay[counter].rollno}</h3>

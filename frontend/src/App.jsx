@@ -8,7 +8,8 @@ import Attendance from './student/attendance.jsx'
 import Upload from './Home/imageupload.jsx';
 import Edit from './teacher/edit.jsx'
 import MM from '../src/attendance/attendance.jsx';
-import FinalAtt from './attendance/final_att.jsx'
+import FinalAtt from './attendance/final_att.jsx';
+import Viewatt from './attendance/viewattendance.jsx'
 function App() {
   return (
 
@@ -23,7 +24,7 @@ function App() {
       <Route path='/login/upload' element = {<Upload></Upload>}></Route>
       <Route path='/login/editsubject' element = {<Edit></Edit>}></Route>
       <Route path='/login/markattendance' element = {<MM></MM>}></Route>
-      <Route path='/login/markattendance/submitatt' element = {<FinalAtt></FinalAtt>}></Route>
+      <Route path='/login/viewattendance' element = {<Viewatt></Viewatt>}></Route>
       </Routes>
       </BrowserRouter>
     {/* <Homepage></Homepage> */}

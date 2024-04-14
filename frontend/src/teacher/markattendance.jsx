@@ -91,6 +91,14 @@ function markattt(props){
         navigate("markattendance", { state: { markatt_req_data } });
            
     }
+    function  handleviewClick(row){
+        let subject_details = row;
+        let teach_data = props.data;
+         let markatt_req_data = [];
+         markatt_req_data.push(subject_details);
+         markatt_req_data.push(teach_data);
+         navigate("viewattendance", { state: { markatt_req_data } });
+    }
     let data = [];
     console.log(teacher_subject.length);
     for (let i = 0; i < teacher_subject.length; i++) {

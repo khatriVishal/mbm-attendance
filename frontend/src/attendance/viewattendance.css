@@ -1,0 +1,17 @@
+.selectdate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 10vh;
+}
+.selectdate select{
+    width: 50%;
+    height: 5vh;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+.selectdate select:hover{
+    cursor: pointer;
+}

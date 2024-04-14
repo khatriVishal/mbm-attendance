@@ -9,6 +9,7 @@ import './imageupload.css'; // Import your CSS file
 
 function ImgUpload() {
     // Define any state or logic you need
+    const navigate = useNavigate();
     const location = useLocation();
   const { data } = location.state;
   console.log(data);
@@ -30,7 +31,12 @@ const handlesubmit = async (e) => {
                 'Content-Type': 'multipart/form-data'
             }
         });
-        console.log(response.data);
+        // console.log(response);
+        alert("succesfully updated your photo");
+        data.userData.photo = response.data;
+        console.log(data);
+        navigate("/loginn" ,{ state: { data } } );
+        
     } catch (error) {
         console.error('Error uploading file:', error);
     }
