@@ -4,13 +4,16 @@ import axios from 'axios';
 import { server } from '../localtunel.jsx';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Editsubject from "./editsubject.jsx"
+import Editsubject from "./editsubject.jsx";
 function attendance(props) {
     let [subjectname, setsubjectname] = useState('');
     let [subjectcode, setsubjectcode] = useState('');
     let [degree , setdegree] = useState('');
     let [Semester , setsemester] = useState('');
     let [branch , setbranch] = useState('');
+
+    console.log(subjectname , "subjectname");
+    let [navgation , setnavgation] = useState(false);
     console.log(props.data.userId);
     const Tid = props.data.userId;
     console.log(Tid);
@@ -20,6 +23,7 @@ function attendance(props) {
     let [deletedata, setdeletedata] = useState([]);
     let [state, setstate] = useState(0);
     let [createsubjects , setcreatesubjects] = useState(0);
+  
     console.log(createsubjects , "createsubjects");
     // let edit_data;
     console.log(editdata, "editt");
@@ -44,6 +48,8 @@ function attendance(props) {
                 })
                 .then(data =>{
                     setteacher_subject(data);
+                    let newbrack = '';
+                    // setbranch(newbrack);
                 })
                 .catch(error => {
                     alert('Failed to fetch data. Please try again.');
@@ -60,7 +66,7 @@ function attendance(props) {
         };
 
         fetchData();
-    }, [state , editdata , createsubjects]);
+    }, [state , editdata , createsubjects,Tid]);
     async function deltesubject() {
         console.log("yesssssssssssssssssssssssssssssssss");
         try {
@@ -96,7 +102,8 @@ function attendance(props) {
               if (response.ok) {
                
                 alert("successfully created subject");
-                
+                setcreatesubjects(0);
+                // setsubjectname('');
                 //
               } else {
                 throw new Error('Login failed');
@@ -105,7 +112,7 @@ function attendance(props) {
             .catch(error => {
               alert('Same subect code is not allowed');
             });
-            setcreatesubjects(0);
+
             
     }
     function editsubject(e){
@@ -244,8 +251,9 @@ function attendance(props) {
             },
         },
     };
-    function handleaddsubject(){
+    function handleaddsubject(){ 
         setcreatesubjects(1);
+       
     }
     return (<>
     <div className="createnew_subject">

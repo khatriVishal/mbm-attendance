@@ -13,6 +13,7 @@ import SubjectForm from './subject_form.jsx';
 import {server} from '../localtunel.jsx';
 import axios from 'axios';
 import Teach_att from './teachet_attendance.jsx';
+import Mark_att from './markattendance.jsx'
 // import Attendance from './attendance.jsx';
 import "./teacher_int.css";
 // import SideNav from './sidenav.jsx';
@@ -34,11 +35,14 @@ function student() {
   setstate(2);
     
   }
-  function handle3(){
-    setstate(3);
+  function handle4(){
+    setstate(4);
    
     navigate("/");
     // console.log("3")
+  }
+  function handle3(){
+    setstate(3);
   }
  
   
@@ -57,11 +61,11 @@ function student() {
               <h3>Attendance</h3>
             </div>
             
-            <div className="nav-items"  >
+            <div className="nav-items"  onClick={handle3}>
               <img src={Subjecticon} alt="" />
               <h3>Subjects</h3>
             </div>
-            <div className="nav-items" onClick={handle3} >
+            <div className="nav-items" onClick={handle4} >
               <img src={Logouticon} alt="" />
               <h3>Logout</h3>
             </div>
@@ -71,7 +75,10 @@ function student() {
               <Teacher_dash data = {data}></Teacher_dash>
             </div>
             <div className={state==2? "clicked" : "unclicked"}>
-             
+             <Mark_att data = {data.userData}></Mark_att>
+           
+            </div>
+            <div  className={state==3? "clicked" : "unclicked"} >
             <Teach_att data = {data.userData}></Teach_att>
             </div>
            

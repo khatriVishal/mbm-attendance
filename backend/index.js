@@ -139,7 +139,7 @@ app.post('/createsubject',  (req, res) => {
         for(let i = 0 ; i<student_data.length ; i++)
         {
           const sql3 = 
-          `INSERT INTO attendance (subject_id, subject_name,student_name , photo, tot_attendace,mark_attendance, branch ,semester, Degree , id) VALUES ('${body.subjectcode}', '${body.subjectname}', '${student_data[i].name}', '${student_data[i].photo}' , '0' ,'0', '${student_data[i].branch}', '${student_data[i].semester}', '${student_data[i].Degree}', '${newId}')`;
+          `INSERT INTO attendance (subject_id, subject_name,student_name ,Rollno, photo, tot_attendace,mark_attendance, branch ,semester, Degree , id) VALUES ('${body.subjectcode}', '${body.subjectname}', '${student_data[i].name}', '${student_data[i].Rollno}','${student_data[i].photo}' , '0' ,'0', '${student_data[i].branch}', '${student_data[i].semester}', '${student_data[i].Degree}', '${newId}')`;
           console.log(sql3);
           db.query(sql3 , (err3 , data3)=>{
            if(err3) 
@@ -205,6 +205,21 @@ app.post("/attendance" ,(req , res)=>{
   
   }
    )
+   app.post("/takeattendance" , (req , res)=>{
+    console.log("yessssssssss");
+    console.log(req.body);
+    const sql = `select * from attendance where id = '${req.body.subjectid}'`;
+    let resposedata = [];
+    db.query(sql , (err , data)=>{
+    if(err) console.log(err);
+    else {
+    res.send(data);
+    
+    }
+
+    })
+    console.log(sql);
+   })
 app.listen(port , ()=>{
     console.log(`working on ${port}`);
 })

@@ -1,0 +1,40 @@
+.custom-table {
+    width: 100vw;
+    .rdt_TableHeadRow {
+        height: 70px; /* Adjust the height as needed */
+        background-color: #eee; /* Header row background color */
+        font-size: 18px;
+        font-weight: 700;
+        /* color: white; */
+    }
+    .rdt_TableRow {
+        height: 70px; /* Adjust the height as needed */
+        background-color: #eee;
+        font-size: 18px;
+    }
+}
+.custom-tables{
+.rdt_TableHeadRow{
+    height: 70px;
+    background-color: #eee;
+    font-size: 18px;
+    font-weight: 700;
+}
+.rdt_TableRow {
+    /* height: 70px; Adjust the height as needed */
+    height: 65px;
+    /* background-color: green; */
+    font-size: 18px;
+}
+}
+.markbtn{
+    /* background-color: rgb(130, 232, 162); */
+    border-radius: 3px;
+    /* margin: 0 10px; */
+}
+.markbtn:hover{
+cursor: pointer;
+}
+.datatblesss{
+    width: 100vw;
+}
