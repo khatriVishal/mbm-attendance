@@ -62,7 +62,7 @@ function student() {
             <Student_dash data={data}></Student_dash>
             </div>
             <div className={state==2? "clicked" : "unclicked"}>
-            <Attendance></Attendance>
+            <Attendance data={data}></Attendance>
             </div>
            
                    {/*  */}

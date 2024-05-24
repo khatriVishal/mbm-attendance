@@ -344,3 +344,17 @@ app.post("/attendance" ,(req , res)=>{
 app.listen(port , ()=>{
     console.log(`working on ${port}`);
 })
+app.post("/studentattendance" ,(req , res)=>{
+  console.log("yesattttt");
+  console.log(req.body.student.userId);
+  const sql = `select * from attendance where  Rollno= '${req.body.student.userId}'`;
+  // const sql = `select * from viewattendance where student_name Rollno= '${req.body[0].userId}'`;
+  console.log(sql);
+  // // console.log(sql);
+  db.query(sql , (err , data)=>{
+    // console.log(err);
+    if(err) {console.log("yessssss");console.log(err);res.send("Some error happened try again");}
+    else {console.log(data);res.send(data);}
+  })
+
+  });

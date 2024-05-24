@@ -1,8 +1,46 @@
 import DataTable from "react-data-table-component";
+import { useEffect } from "react";
+import { useState } from "react";
+import { server } from '../localtunel';
 import "./attendance.css";
-function attendance(){
+function attendance(props){
+  // let [new_data , setnew_data] = 
+  let [newdata, setnewdata] = useState([]);
+  const student = props.data.userData;
+  useEffect(() => {
+    console.log("yes my name is vishal");
+    const fetchData =  () => {
+        fetch(`${server}/studentattendance`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({student})
+          })
+            .then(response => {
+              if (response.ok) {
+                return response.json();
+                // setteacher_subject(response.data);
+              } else {
+                throw new Error('Something wrong happened');
+              }
+            })
+            .then(data =>{
+              console.log("yessssssss");
+              setnewdata(data);
+                console.log(data);
+            })
+            .catch(error => {
+                alert('Failed to fetch data. Please try again.');
+                console.error('Error fetching data:', error);
+            });
 
+        
+    };
 
+    fetchData();
+}, []);
+console.log(newdata);
     const columns = [
       {
         name : "Subject code",
@@ -23,41 +61,7 @@ function attendance(){
       
       
     ]
-    const data = [
-      {
-        subcode:"CSE231A",
-        subjectname:"AI/ML",
-        attclasses:"13",
-        totclasses:"20"
-      },
-      {
-        subcode:"CSE232A",
-        subjectname:"JAVA",
-        attclasses:"9",
-        totclasses:"13"
-      },
-      {
-        subcode:"CSE233A",
-        subjectname:"MAD",
-        attclasses:"6",
-        totclasses:"9"
-      },
-      {
-        subcode:"CSE234A",
-        subjectname:"Compiler design",
-        attclasses:"0",
-        totclasses:"3"
-      },
-      {
-        subcode:"CSE235A",
-        subjectname:"Visual Computing",
-        attclasses:"1",
-        totclasses:"4"
-      }
-
-
-
-    ]
+    const data = []
     const customStyles = {
         headCells: {
             style: {
@@ -71,6 +75,17 @@ function attendance(){
             },
         },
     };
+    for(let i = 0 ; i<newdata.length ; i++)
+      {
+        let attendance_details = {
+          subcode: newdata[i].subject_id,
+          subjectname: newdata[i].Subject_name,
+          attclasses: newdata[i].mark_attendance,
+          totclasses: newdata[i].tot_attendace,
+          
+      }
+      data.push(attendance_details);
+      }
 return (<>
 <div className="datatble">
  <DataTable 

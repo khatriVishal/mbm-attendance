@@ -1,2 +1,2 @@
 export const server =
-"https://e58d-2401-4900-5ba9-6dfc-4122-976c-f48e-99cb.ngrok-free.app"; 
+"https://e28f-2405-201-5c11-5173-e469-89d7-16ac-5009.ngrok-free.app"; 
